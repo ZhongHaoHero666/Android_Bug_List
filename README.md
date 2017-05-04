@@ -300,3 +300,14 @@ Dagger2文章
 
 转场动画
     http://immortalz.me/859.html
+    
+    自定义View学习
+    https://github.com/GcsSloop/AndroidNote
+
+微信监听联系人变化策略
+    http://mp.weixin.qq.com/s?__biz=MzA5MzI3NjE2MA==&mid=2650239236&idx=1&sn=54a79e86e584dceb045fa0499a75b74b&chksm=8863806bbf14097df48f698f4a27a2181907e7049f016a7f7c88eec4c5c21a7e3b19ee56435e&mpshare=1&scene=23&srcid=0419o7xBRJYoIYSmm1hhIvuR#rd
+
+Icon 图标 获取网站
+ https://materialdesignicons.com/
+https://zh.icons8.com/
+http://www.flaticon.com/
