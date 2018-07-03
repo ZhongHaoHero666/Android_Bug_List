@@ -71,8 +71,7 @@
         }
         String url = URLDecoder.decode(result.getPayParam().getPrepayUrl(), "UTF-8");
         webView.loadUrl(url);
-        
-    ```
+ ```
 
 ### 4.ARouter 组件化开发使用转场动画 出现老页面退出时黑屏
 需要设置activity Theme 的属性
@@ -93,6 +92,7 @@
         </shape>
     </item>
 </layer-list>
+
  ```
 
 ### 5 android8.0的时候主题不能同时设置指定方向和activity透明
@@ -109,8 +109,8 @@ FF FF FF FF FF 1F 69 40
 可以使用BigDecimal实现精确加减乘除运算。
 
 ### 7 沉浸式状态栏 + Edittext  软件盘遮挡输入框
-解决方案： http://www.jb51.net/article/94705.htm
-延伸： https://juejin.im/post/5a25f6146fb9a0452405ad5b
+解决方案： [Android EditText被软键盘遮盖的处理方法](http://www.jb51.net/article/94705.htm)
+延伸： [随手记Android沉浸式状态栏的踩坑之路](https://juejin.im/post/5a25f6146fb9a0452405ad5b)
 一般沉浸式的框架都使用getWindow().getDecorView().setSystemUiVisibility方法设置SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN或SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION ，或者设置了window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)，此时便会引发EditText被键盘遮盖问题。
 
 解决方法呢，内容根布局（不包括titleBar）改成scrollView，然后动态的计算键盘高度，并设置scrollView的paddingBottom来达到适配。 （工具： KeyboardPatch，直接在文件中搜索就可以找到该类）
@@ -144,12 +144,14 @@ FF FF FF FF FF 1F 69 40
 
 ### 13.集成umeng分享，在8.0 系统，分享到微博会报错
 需要在配置分享的回调清单文件中去掉朝向的代码
- ``` <activity
+ ``` 
+ <activity
     android:name="com.umeng.socialize.media.WBShareCallBackActivity"
     android:configChanges="keyboardHidden|orientation"
     android:exported="false"
     //android:screenOrientation="portrait"
-    android:theme="@android:style/Theme.Translucent.NoTitleBar" /> ```
+    android:theme="@android:style/Theme.Translucent.NoTitleBar" /> 
+ ```
 
 
 
