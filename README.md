@@ -152,7 +152,11 @@ FF FF FF FF FF 1F 69 40
     //android:screenOrientation="portrait"
     android:theme="@android:style/Theme.Translucent.NoTitleBar" /> 
  ```
-
+ 
+### 13. View.setClcikAble(false)无作用;
+因为View.setOnClickListener(）方法中调用了View.setClcikAble(true),
+在使用bufferKnife的时候会出现因为时间线异步导致不能setClcikAble（）方法不能起到效果。
+可以使用View.setEnable()，设置点击事件是否可用。
 
 
 
