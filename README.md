@@ -158,6 +158,9 @@ FF FF FF FF FF 1F 69 40
 在使用bufferKnife的时候会出现因为时间线异步导致不能setClcikAble（）方法不能起到效果。
 可以使用View.setEnable()，设置点击事件是否可用。
 
+### 13. Android studio 编译问题：finished with non-zero exit value 1 Or finished with non-zero exit value 2
+* finished with non-zero exit value 1 ： 方法数超过65535问题，使用 multiDexEnabled true 即可。
 
+* finished with non-zero exit value 2 ： 重复依赖错误，检查各模块以来配置，找到多余添加的依赖删除后重新编译即可。
 
 
