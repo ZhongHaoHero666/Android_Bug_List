@@ -162,4 +162,6 @@ FF FF FF FF FF 1F 69 40
 方法数超过65535问题，使用 multiDex 即可。 [延伸阅读](https://github.com/TangXiaoLv/Android-Easy-MultiDex)
 
 
+#### 15. 删除GreenDao生成的文件后，无法再次生成DaoMaster等
+GreenDao plugin 运行在 andorid studio 的代码检查后，所以如果项目中有处理GreenDao的工具类，那么在删除插件生成的文件（DaoMaster等）后，make project 会无法生成文件，此时需要将工具类注释，然后先生成数据库辅助文件，再打开注释编译运行即可。
 
