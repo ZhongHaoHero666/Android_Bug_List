@@ -24,7 +24,7 @@
 这是因为5.0直接返回的是图片路径，5.0以下是一个和数据库有关的索引值,6.0也是一个索引值  
 以下为解决方案：
 
-  ``` 
+  ```java
 Uri uri = data.getData();  
 if (null != uri) {  
     int sdkVersion = Integer.valueOf(android.os.Build.VERSION.SDK);  
@@ -56,13 +56,15 @@ if (null != uri) {
 解决： 只需要在app.iml保持一致即可，不能早git上频繁的上传该文件。
 标准配置代码为：
 
- ``` <orderEntry type="jdk" jdkName="Android API 25 Platform" jdkType="Android SDK" /> ```
+ ```xml
+<orderEntry type="jdk" jdkName="Android API 25 Platform" jdkType="Android SDK" />
+```
 
 <a id="3"/>
 
 #### 3.新建一个webview 加载h5调起微信支付
  需要重写的是 
- ```
+ ```java
 shouldOverrideUrlLoading(WebView view, String url)
 //去微信支付
 if (webView == null) {
@@ -109,7 +111,7 @@ webView.loadUrl(url);
 
 #### 5.EditText不设置背景时，键盘覆盖了输入框底部
 解决方式 添加透明背景
- ```
+ ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 主体背景颜色值 -->
@@ -185,7 +187,7 @@ FF FF FF FF FF 1F 69 40
  
 #### 14.集成umeng分享，在8.0 系统，分享到微博会报错
 需要在配置分享的回调清单文件中去掉朝向的代码
- ``` 
+ ```xml
  <activity
     android:name="com.umeng.socialize.media.WBShareCallBackActivity"
     android:configChanges="keyboardHidden|orientation"
