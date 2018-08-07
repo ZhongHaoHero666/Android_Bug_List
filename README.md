@@ -25,26 +25,26 @@
 以下为解决方案：
 
   ``` 
-                Uri uri = data.getData();  
-                if (null != uri) {  
-                   int sdkVersion = Integer.valueOf(android.os.Build.VERSION.SDK);  
-                    String path = "";  
-                    if (sdkVersion == 21 || sdkVersion == 22){  
-                        path = uri.getPath();//5.0直接返回的是图片路径，5.0以下是一个和数据库有关的索引值,6.0也是一个索引值  
-                    }else {  
-                        String[] proj = {MediaStore.Images.Media.DATA};  
-                        //好像是android多媒体数据库的封装接口，具体的看Android文档  
-                        Cursor cursor = managedQuery(uri, proj, null, null, null);  
-                        //按我个人理解 这个是获得用户选择的图片的索引值  
-                        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);  
-                        //将光标移至开头 ，这个很重要，不小心很容易引起越界  
-                        cursor.moveToFirst();  
-                        //最后根据索引值获取图片路径  
-                        path = cursor.getString(column_index);  
-                    }  
-  
-                        carFile = new File(path);  
-              }               
+Uri uri = data.getData();  
+if (null != uri) {  
+    int sdkVersion = Integer.valueOf(android.os.Build.VERSION.SDK);  
+    String path = "";  
+    if (sdkVersion == 21 || sdkVersion == 22){  
+        path = uri.getPath();//5.0直接返回的是图片路径，5.0以下是一个和数据库有关的索引值,6.0也是一个索引值  
+    }else {  
+        String[] proj = {MediaStore.Images.Media.DATA};  
+        //好像是android多媒体数据库的封装接口，具体的看Android文档  
+        Cursor cursor = managedQuery(uri, proj, null, null, null);  
+        //按我个人理解 这个是获得用户选择的图片的索引值  
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);  
+        //将光标移至开头 ，这个很重要，不小心很容易引起越界  
+        cursor.moveToFirst();  
+        //最后根据索引值获取图片路径  
+        path = cursor.getString(column_index);  
+    }  
+
+        carFile = new File(path);  
+}               
   ```
   
   <a id="2"/>
@@ -56,52 +56,52 @@
 解决： 只需要在app.iml保持一致即可，不能早git上频繁的上传该文件。
 标准配置代码为：
 
- ` <orderEntry type="jdk" jdkName="Android API 25 Platform" jdkType="Android SDK" /> `
+ ``` <orderEntry type="jdk" jdkName="Android API 25 Platform" jdkType="Android SDK" /> ```
 
 <a id="3"/>
 
 #### 3.新建一个webview 加载h5调起微信支付
  需要重写的是 
  ```
-   shouldOverrideUrlLoading(WebView view, String url)
-   //去微信支付
-        if (webView == null) {
-            webView = new WebView(this);
-            WebViewHelper.initWebViewSettings(webView);
-            webView.setWebViewClient(new BaseWebViewClient(getMvpViewHelper()) {
-                @Override
-                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    // 如下方案可在非微信内部WebView的H5页面中调出微信支付
-                    if (url.startsWith(UrlConfig.WECHAT_PAY_START)) {
-                        try {
-                            Intent intent = new Intent();
-                            intent.setAction(Intent.ACTION_VIEW);
-                            intent.setData(Uri.parse(url));
-                            startActivity(intent);
-                        } catch (ActivityNotFoundException e) {
-                            ToastUtil.showToast("请安装微信最新版！");
-                        }
-                    } else {
-                        view.loadUrl(url);
-                        if (url.startsWith(UrlConfig.WECHAT_PAY_RESULT)) {//支付成功后
-                            //do something
-                        }
-                    }
-                    return true;
+shouldOverrideUrlLoading(WebView view, String url)
+//去微信支付
+if (webView == null) {
+    webView = new WebView(this);
+    WebViewHelper.initWebViewSettings(webView);
+    webView.setWebViewClient(new BaseWebViewClient(getMvpViewHelper()) {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            // 如下方案可在非微信内部WebView的H5页面中调出微信支付
+            if (url.startsWith(UrlConfig.WECHAT_PAY_START)) {
+                try {
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(url));
+                    startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    ToastUtil.showToast("请安装微信最新版！");
                 }
-            });
-            ProgressBar progressBar = findViewById(R.id.webpage_progressbar);
-            webView.setWebChromeClient(new BaseWebChromeClient(getContext(), progressBar));
+            } else {
+                view.loadUrl(url);
+                if (url.startsWith(UrlConfig.WECHAT_PAY_RESULT)) {//支付成功后
+                    //do something
+                }
+            }
+            return true;
         }
-        String url = URLDecoder.decode(result.getPayParam().getPrepayUrl(), "UTF-8");
-        webView.loadUrl(url);
+    });
+    ProgressBar progressBar = findViewById(R.id.webpage_progressbar);
+    webView.setWebChromeClient(new BaseWebChromeClient(getContext(), progressBar));
+}
+String url = URLDecoder.decode(result.getPayParam().getPrepayUrl(), "UTF-8");
+webView.loadUrl(url);
  ```
  
   <a id="4"/>
 
 #### 4.ARouter 组件化开发使用转场动画 出现老页面退出时黑屏
 需要设置activity Theme 的属性
- ` <item name="android:windowIsTranslucent">true</item> `
+ ``` <item name="android:windowIsTranslucent">true</item> ```
 
 最后分析问题，发现时转场动画写的有问题，要求需要4个anim文件，分别是创建_in，创建_our，销毁_in，销毁_out，并且进入和退出的动画要衔接上（要求无缝衔接），才不会出现黑屏。
 
