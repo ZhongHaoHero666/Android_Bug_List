@@ -15,6 +15,7 @@
 <a href="#15">`15. View.setClcikAble(false)无作用`</a>  
 <a href="#16">`16. Android studio 编译问题：com.android.dex.DexIndexOverflowException: method ID not in [0, 0xffff]: 65536`</a>  
 <a href="#17">`17. 删除GreenDao生成的文件后，无法再次生成DaoMaster等`</a>  
+<a href="#18">`18. 渠道打包修改applicationID时，微信登录无法回调`</a>  
 
 <a id="1"/>
 
@@ -213,3 +214,8 @@ FF FF FF FF FF 1F 69 40
 #### 17. 删除GreenDao生成的文件后，无法再次生成DaoMaster等
 GreenDao plugin 运行在 andorid studio 的代码检查后，所以如果项目中有处理GreenDao的工具类，那么在删除插件生成的文件（DaoMaster等）后，make project 会无法生成文件，此时需要将工具类注释，然后先生成数据库辅助文件，再打开注释编译运行即可。
 
+ <a id="18"/>
+ 
+####18. 渠道打包修改applicationID时，微信登录无法回调
+在使用多渠道打包时，在flavor 的渠道中修改applicationId，结果发现原本可以正常使用的微信快捷登录无法收到WXEntryActivity类的回调，导致确认授权后程序没有反应。
+这是因为WXEntryActivity默认是在包名（这里的包名指的是applicationId）下的wxapi路径下，如果你的应用程序可能有多个applicationId，那么需要在每个applicationId路径下新建一个WXEntryActivity类（清单文件中也要添加）。
