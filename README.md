@@ -216,6 +216,6 @@ GreenDao plugin 运行在 andorid studio 的代码检查后，所以如果项目
 
  <a id="18"/>
  
-####18. 渠道打包修改applicationID时，微信登录无法回调
+#### 18. 渠道打包修改applicationID时，微信登录无法回调
 在使用多渠道打包时，在flavor 的渠道中修改applicationId，结果发现原本可以正常使用的微信快捷登录无法收到WXEntryActivity类的回调，导致确认授权后程序没有反应。
 这是因为WXEntryActivity默认是在包名（这里的包名指的是applicationId）下的wxapi路径下，如果你的应用程序可能有多个applicationId，那么需要在每个applicationId路径下新建一个WXEntryActivity类（清单文件中也要添加）。
