@@ -16,7 +16,7 @@
 <a href="#16">`16. Android studio 编译问题：com.android.dex.DexIndexOverflowException: method ID not in [0, 0xffff]: 65536`</a>  
 <a href="#17">`17. 删除GreenDao生成的文件后，无法再次生成DaoMaster等`</a>  
 <a href="#18">`18. 渠道打包修改applicationID时，微信登录无法回调`</a>  
-<a href="#19">`19. 华为7.0+系统,报OOM，其他手机机型不报该错误`</a>  
+<a href="#19">`19. 华为7.0+系统,报OOM，Throwing OutOfMemoryError "pthread_create (1040KB stack) failed: Out of memory"，其他手机机型不报该错误`</a>  
 
 <a id="1"/>
 
@@ -223,7 +223,7 @@ GreenDao plugin 运行在 andorid studio 的代码检查后，所以如果项目
 
  <a id="19"/>
  
-#### 19. 华为7.0+系统,报OOM，其他手机机型不报该错误
+#### 19. 华为7.0+系统,报OOM，Throwing OutOfMemoryError "pthread_create (1040KB stack) failed: Out of memory"，其他手机机型不报该错误
 [详细解读](https://www.jianshu.com/p/e574f0ffdb42)
 
 该问题出现在华为andorid7.0+系统手机，此时堆内存和物理内存，但仍然产生OOM，是因为，华为android7.0+手机在系统层级对单个进程的线程线程数进行限制（最多只能有500个线程，原生系统的线程数限制>500），当应用内线程数量过多超过临界值时，便会产生OOM。
