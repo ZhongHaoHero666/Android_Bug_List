@@ -17,6 +17,7 @@
 <a href="#17">`17. 删除GreenDao生成的文件后，无法再次生成DaoMaster等`</a>  
 <a href="#18">`18. 渠道打包修改applicationID时，微信登录无法回调`</a>  
 <a href="#19">`19. 华为7.0+系统,报OOM，Throwing OutOfMemoryError "pthread_create (1040KB stack) failed: Out of memory"，其他手机机型不报该错误`</a>  
+<a href="#20">`20. 软键盘可以调出，但是无法隐藏的问题。`</a>  
 
 <a id="1"/>
 
@@ -229,3 +230,28 @@ GreenDao plugin 运行在 andorid studio 的代码检查后，所以如果项目
 该问题出现在华为andorid7.0+系统手机，此时堆内存和物理内存，但仍然产生OOM，是因为，华为android7.0+手机在系统层级对单个进程的线程线程数进行限制（最多只能有500个线程，原生系统的线程数限制>500），当应用内线程数量过多超过临界值时，便会产生OOM。
 
 解决方案：梳理代码逻辑，巧用线程池，优化线程控制。
+
+ <a id="20"/>
+ 
+#### 20. 软键盘可以调出，但是无法隐藏的问题。
+ 软键盘可以调出，但是无法隐藏的问题。
+```java
+//弹出软键盘
+InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+        }
+
+//收起软键盘
+InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null && view != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+```
+在```java showSoftInput(View view , int flag) ``` 方法中，flag 表示 调出类型
+
+
+当```java flag = InputMethodManager.SHOW_FORCED ``` 时，表示强显式调用，非强制不收起。此参数导致hideSoftInputFromWindow失效。
+
+
+当```java flag = InputMethodManager.SHOW_IMPLICIT ``` 时，表示隐式调用，可以正常收起。
