@@ -1,7 +1,7 @@
 <a href="#1">`1.index of bound expection（相册）`</a>  
 <a href="#2">`2.Error: Please select Android SDK`</a>  
 <a href="#3">`3.新建一个webview 加载h5调起微信支付`</a>  
-<a href="#4">`4.ARouter 组件化开发使用转场动画 出现老页面退出时黑屏`</a>  
+<a href="#4">`4.ARouter 报 There's no path match...`</a>  
 <a href="#5">`5.EditText不设置背景时，键盘覆盖了输入框底部`</a>  
 <a href="#6">`6.android8.0的时候主题不能同时设置指定方向和activity透明`</a>  
 <a href="#7">`7.double 类型数值计算不精准的问题`</a>  
@@ -104,13 +104,10 @@ webView.loadUrl(url);
  
   <a id="4"/>
 
-#### 4.ARouter 组件化开发使用转场动画 出现老页面退出时黑屏
-需要设置activity Theme 的属性
- ``` <item name="android:windowIsTranslucent">true</item> ```
-
-最后分析问题，发现时转场动画写的有问题，要求需要4个anim文件，分别是创建_in，创建_our，销毁_in，销毁_out，并且进入和退出的动画要衔接上（要求无缝衔接），才不会出现黑屏。
-
-  <a id="5"/>
+#### 4.ARouter 报 There's no path match...
+按照文档说明配置后仍然出现此错误。
+最后发现在gradle中配置了获取modelName的名称，该名称必须与路由路径中的第一个值相同，否则会无法匹配。
+所以每个model下的Activity的路由名称的第一个值必须是模块名。
 
 #### 5.EditText不设置背景时，键盘覆盖了输入框底部
 解决方式 添加透明背景
