@@ -18,6 +18,7 @@
 <a href="#18">`18. 渠道打包修改applicationID时，微信登录无法回调`</a>  
 <a href="#19">`19. 华为7.0+系统,报OOM，Throwing OutOfMemoryError "pthread_create (1040KB stack) failed: Out of memory"，其他手机机型不报该错误`</a>  
 <a href="#20">`20. 软键盘可以调出，但是无法隐藏的问题。`</a>  
+<a href="#20">`21. Android P webview加载http:// uri 页面空白。`</a>  
 
 <a id="1"/>
 
@@ -252,3 +253,8 @@ InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_MET
 
 
 当```java flag = InputMethodManager.SHOW_IMPLICIT ``` 时，表示隐式调用，可以正常收起。
+
+ <a id="21"/>
+ 
+#### 21. Android P webview加载http:// uri 页面空白
+自Android P 开始，谷歌全面禁止http://访问，所有的网络请求均需要使用https://（包括webview）
