@@ -20,7 +20,7 @@
 <a href="#20">`20. 软键盘可以调出，但是无法隐藏的问题。`</a>  
 <a href="#21">`21. Android P webview加载http:// uri 页面空白。`</a>  
 <a href="#22">`22. Umeng的Mapping文件上传10M限制`</a>  
-  
+<a href="#23">`23. 调试微信支付时的注意事项`</a> 
   
   
 <a id="1"/>
@@ -269,3 +269,12 @@ InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_MET
 将下列代码保存为一个.sh文件  直接运行，便可以把同目录下的“mapping.txt”文件压缩成“newmapping.txt”文件。
 
 ``` find ./ -name mapping.txt | xargs cat | awk '{if($2!=$4) print $0}'>./newmapping.txt  ```
+
+<a id="23"/>
+
+####  23. 调试微信支付时的注意事项
+
+* 1.debug调试时需要配置debug签名（这个一般项目中都会将debug和release配置成同一套签名）。
+* 2.调试时需要确定后台返回的“appid，包名，签名”与前端是否一致（多applicationId时情况例外）。
+* 3.微信登录和分享以及小程序支付的回调类是WXEntryActivity，微信原生支付的回调类是WXPayEntryActivity，可以将业务逻辑统一在WXEntryActivity中onResp方法中处理，然后让WXPayEntryActivity 继承 WXEntryActivity并在清单文件中声明即可。
+
