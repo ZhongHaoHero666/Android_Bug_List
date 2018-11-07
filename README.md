@@ -18,8 +18,11 @@
 <a href="#18">`18. 渠道打包修改applicationID时，微信登录无法回调`</a>  
 <a href="#19">`19. 华为7.0+系统,报OOM，Throwing OutOfMemoryError "pthread_create (1040KB stack) failed: Out of memory"，其他手机机型不报该错误`</a>  
 <a href="#20">`20. 软键盘可以调出，但是无法隐藏的问题。`</a>  
-<a href="#20">`21. Android P webview加载http:// uri 页面空白。`</a>  
-
+<a href="#21">`21. Android P webview加载http:// uri 页面空白。`</a>  
+<a href="#22">`22. Umeng的Mapping文件上传10M限制`</a>  
+  
+  
+  
 <a id="1"/>
 
 #### 1.index of bound expection（相册）
@@ -258,3 +261,11 @@ InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_MET
  
 #### 21. Android P webview加载http:// uri 页面空白
 `自Android P 开始，谷歌全面禁止http:// 访问，所有的网络请求均需要使用https://（包括webview）`
+
+<a id="22"/>
+
+####  22. Umeng的Mapping文件上传10M限制
+由于友盟对maping文件在上传时有不超过10m的限制，所以需要对过大的mapping文件进行压缩处理。
+将下列代码保存为一个.sh文件  直接运行，便可以把同目录下的“mapping.txt”文件压缩成“newmapping.txt”文件。
+
+``` find ./ -name mapping.txt | xargs cat | awk '{if($2!=$4) print $0}'>./newmapping.txt  ```
