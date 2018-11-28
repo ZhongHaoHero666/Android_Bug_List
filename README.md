@@ -279,6 +279,7 @@ InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_MET
 * 2.调试时需要确定后台返回的“appid，包名，签名”与前端是否一致（多applicationId时情况例外）。
 * 3.微信登录和分享以及小程序支付的回调类是WXEntryActivity，微信原生支付的回调类是WXPayEntryActivity，可以将业务逻辑统一在WXEntryActivity中onResp方法中处理，然后让WXPayEntryActivity 继承 WXEntryActivity并在清单文件中声明即可。
 
+<a id="24"/>
 
 ####  24. AndroidStudio 设置本地代理后（host 127.0.0.1）后，无法清空代理配置
 在 AndroidStudio 设置本地代理后（host 127.0.0.1）后，编译项目时报代理错误（http 500 ），链接请求被拒绝。关闭AS的代理后仍然报错。且项目 gradle.properties 文件中没有代理配置。
