@@ -21,6 +21,7 @@
 <a href="#21">`21. Android P webview加载http:// uri 页面空白。`</a>  
 <a href="#22">`22. Umeng的Mapping文件上传10M限制`</a>  
 <a href="#23">`23. 调试微信支付时的注意事项`</a>
+  
 <a href="#24">`24. AndroidStudio设置本地代理后（host：127.0.0.1）后，无法清空代理配置，导致代理错误，链接被拒`</a> 
   
   
@@ -281,6 +282,6 @@ InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_MET
 
 <a id="24"/>
 
-####  24. 24. AndroidStudio设置本地代理后（host：127.0.0.1）后，无法清空代理配置，导致代理错误，链接被拒
+####  24. AndroidStudio设置本地代理后（host：127.0.0.1）后，无法清空代理配置，导致代理错误，链接被拒
 在 AndroidStudio 设置本地代理后（host 127.0.0.1）后，编译项目时报代理错误（http 500 ），链接请求被拒绝。关闭AS的代理后仍然报错。且项目 gradle.properties 文件中没有代理配置。
 这是因为在AS3.2之后，AS将代理配置文件放在了/user/.gradle/gradle.properties文件，不再存放在项目目录下的gradle.properties文件中。此时只需要清空该文件中的代理配置即可。
