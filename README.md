@@ -13,15 +13,15 @@
 <a href="#13">`13. Rejecting re-init on previously-failed class java.lang.Class<com.taobao.accs.utl.k>: java.lang.NoClassDefFoundError`</a>  
 <a href="#14">`14.集成umeng分享，在8.0 系统，分享到微博会报错`</a>  
 <a href="#15">`15. View.setClcikAble(false)无作用`</a>  
-<a href="#16">`16. Android studio 编译问题：com.android.dex.DexIndexOverflowException: method ID not in [0, 0xffff]: 65536`</a>  
+<a href="#16">`16. Android studio 编译问题：com.android.dex.DexIndexOverflowException: method ID not in [0, 0xffff]: 65536`</a> 
 <a href="#17">`17. 删除GreenDao生成的文件后，无法再次生成DaoMaster等`</a>  
 <a href="#18">`18. 渠道打包修改applicationID时，微信登录无法回调`</a>  
 <a href="#19">`19. 华为7.0+系统,报OOM，Throwing OutOfMemoryError "pthread_create (1040KB stack) failed: Out of memory"，其他手机机型不报该错误`</a>  
 <a href="#20">`20. 软键盘可以调出，但是无法隐藏的问题。`</a>  
 <a href="#21">`21. Android P webview加载http:// uri 页面空白。`</a>  
 <a href="#22">`22. Umeng的Mapping文件上传10M限制`</a>  
-<a href="#23">`23. 调试微信支付时的注意事项`</a>
-<a href="#24">`24. AndroidStudio设置本地代理后（host：127.0.0.1）后，无法清空代理配置，导致代理错误，链接被拒`</a> 
+<a href="#23">`23. 调试微信支付时的注意事项`</a>  
+<a href="#24">`24. AndroidStudio设置本地代理后（host：127.0.0.1）后，无法清空代理配置，导致代理错误，链接被拒`</a>  
 <a href="#25">`25. android studio 模拟器显示不出高德地图（黑屏）`</a>  
   
 <a id="1"/>
@@ -289,6 +289,7 @@ InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_MET
 <a id="25"/>
 
 ####  25. android studio 模拟器显示不出高德地图（黑屏）
+报错信息：No implementation found for void com.autonavi.ae.gmap.GLMapEngine.nativeInitParam()
 高版本模拟器（Android 8.0+）对SO HEADER部分进行检查，这与高德对模拟器SO的压缩方案有冲突；（真机没有问题）
 如果去除压缩x86平台包体积会增加到11M，为了满足大部分用户对包体积的要求，官网中为已压缩版本；
 
