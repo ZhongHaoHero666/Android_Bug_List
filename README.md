@@ -24,6 +24,7 @@
 <a href="#24">`24. AndroidStudio设置本地代理后（host：127.0.0.1）后，无法清空代理配置，导致代理错误，链接被拒`</a>  
 <a href="#25">`25. android studio 模拟器显示不出高德地图（黑屏）`</a>  
 <a href="#26">`26. 关于代码中手动调用 System.gc() 的说明`</a>  
+<a href="#27">`27. 多个组件中依赖版本不一致导致的编译错误问题`</a>  
   
 <a id="1"/>
 
@@ -358,4 +359,20 @@ public static void runFinalization() {
 ·直接调用Runtime.getRuntime().gc()
 
 PS:不过如果开发者在代码中手动调用了gc，在AndroidStudio内部仍然会报一个“不要觉得你比gc更聪明的警告”，建议开发者不要直接使用gc方法，破坏gc的一般运行规则。
+
+
+<a id="27"/>
+
+####  27. 多个组件中的依赖版本不一致导致的编译错误问题
+该问题由多个组件（尤其是第三方）引用的基础依赖（如v4、v7）版本不一致导致。
+
+解决方式很简单，可以使用如下配置方式在项目root build.gradle中声明强制依赖版本：
+```
+allprojects {
+  configurations.all {
+        // 为了保证编译正常 强制依赖统一版本
+        resolutionStrategy.force "com.android.support:support-v4:${feineConfig.v4-version}"
+  }
+}
+```
 
