@@ -23,6 +23,7 @@
 <a href="#23">`23. 调试微信支付时的注意事项`</a>  
 <a href="#24">`24. AndroidStudio设置本地代理后（host：127.0.0.1）后，无法清空代理配置，导致代理错误，链接被拒`</a>  
 <a href="#25">`25. android studio 模拟器显示不出高德地图（黑屏）`</a>  
+<a href="#26">`26. 关于代码中手动调用 System.gc() 的说明`</a>  
   
 <a id="1"/>
 
@@ -293,4 +294,68 @@ InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_MET
 高版本模拟器（Android 8.0+）对SO HEADER部分进行检查，这与高德对模拟器SO的压缩方案有冲突；（真机没有问题）
 如果去除压缩x86平台包体积会增加到11M，为了满足大部分用户对包体积的要求，官网中为已压缩版本；
 
+<a id="26"/>
+
+####  26. 关于代码中手动调用 System.gc() 的说明
+
+在android5.0之前，gc方法源码如下：
+```
+/**
+ * 向JVM表明现在是垃圾收集器运行的好时机。注意，这只是一个提示。不能保证垃圾收集器将实际运行。
+ */
+public static void gc() {
+    Runtime.getRuntime().gc();
+}
+```
+在android5.0之后，gc方法发生了改变：
+```
+/**
+ * 向JVM表明现在是垃圾收集器运行的好时机。注意，这只是一个提示。不能保证垃圾收集器将实际运行。
+ */
+public static void gc() {
+    boolean shouldRunGC;
+    synchronized(lock) {
+        shouldRunGC = justRanFinalization;
+        if (shouldRunGC) {
+            justRanFinalization = false;
+        } else {
+            runGC = true;
+        }
+    }
+    if (shouldRunGC) {
+        Runtime.getRuntime().gc();
+    }
+}
+```
+
+增加关键条件shouldRunGC，该变量只有在runFinalization（ ）方法中被赋值。
+```
+/ * *
+  * 向VM提供一个提示，说明尝试它是有用的
+  * 执行任何未完成的对象终结。
+  * /
+public static void runFinalization() {
+    boolean shouldRunGC;
+    synchronized(lock) {
+        shouldRunGC = runGC;
+        runGC = false;
+    }
+    if (shouldRunGC) {
+        Runtime.getRuntime().gc();
+    }
+    Runtime.getRuntime().runFinalization();
+    synchronized(lock) {
+        justRanFinalization = true;
+    }
+}
+```
+通过注释可以了解到 最后执行对象的finalize()方法。
+
+且还存在一个变量runGC，在System.gc()里会赋值为true，而在System.runFinalization()里只有runGC为true时，才会真的去触发gc。
+
+故在android 5.0之后，如果想要执行gc，有以下两种方式：
+·System.gc()和System.runFinalization()同时调用
+·直接调用Runtime.getRuntime().gc()
+
+PS:不过如果开发者在代码中手动调用了gc，在AndroidStudio内部仍然会报一个“不要觉得你比gc更聪明的警告”，建议开发者不要直接使用gc方法，破坏gc的一般运行规则。
 
