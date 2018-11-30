@@ -355,8 +355,8 @@ public static void runFinalization() {
 且还存在一个变量runGC，在System.gc()里会赋值为true，而在System.runFinalization()里只有runGC为true时，才会真的去触发gc。
 
 故在android 5.0之后，如果想要执行gc，有以下两种方式：
-·System.gc()和System.runFinalization()同时调用
-·直接调用Runtime.getRuntime().gc()
+* System.gc()和System.runFinalization()同时调用
+* 直接调用Runtime.getRuntime().gc()
 
 PS:不过如果开发者在代码中手动调用了gc，在AndroidStudio内部仍然会报一个“不要觉得你比gc更聪明的警告”，建议开发者不要直接使用gc方法，破坏gc的一般运行规则。
 
