@@ -294,6 +294,7 @@ InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_MET
 报错信息：No implementation found for void com.autonavi.ae.gmap.GLMapEngine.nativeInitParam()
 高版本模拟器（Android 8.0+）对SO HEADER部分进行检查，这与高德对模拟器SO的压缩方案有冲突；（真机没有问题）
 如果去除压缩x86平台包体积会增加到11M，为了满足大部分用户对包体积的要求，官网中为已压缩版本；
+
 相关链接：[官方论坛](http://lbsbbs.amap.com/forum.php?mod=viewthread&tid=42965)
 
 <a id="26"/>
