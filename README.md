@@ -24,7 +24,8 @@
 <a href="#24">`24. AndroidStudio设置本地代理后（host：127.0.0.1）后，无法清空代理配置，导致代理错误，链接被拒`</a>  
 <a href="#25">`25. android studio 模拟器显示不出高德地图（黑屏）`</a>  
 <a href="#26">`26. 关于代码中手动调用 System.gc() 的说明`</a>  
-<a href="#27">`27. 多个组件中依赖版本不一致导致的编译错误问题`</a>  
+<a href="#27">`27. 多个组件中依赖版本不一致导致的编译错误问题`</a> 
+<a href="#28">`28.java.lang.IllegalStateException: Only fullscreen opaque activities can request orientation`</a> 
   
 <a id="1"/>
 
@@ -378,3 +379,9 @@ allprojects {
 }
 ```
 
+<a id="28"/>
+
+####  28. java.lang.IllegalStateException: Only fullscreen opaque activities can request orientation
+当开发时targetSdk = 27+，且在android 8.0手机上运行时，报此错误。意为：当确定屏幕方向时，当前页面不可使用全屏属性。
+相关链接：[解析1](https://zhuanlan.zhihu.com/p/32190223)  [解析2](https://blog.csdn.net/starry_eve/article/details/82777160)  
+具体解决方案由业务决定。
