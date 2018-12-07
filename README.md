@@ -385,6 +385,8 @@ allprojects {
 当开发时targetSdk = 27+，且在android 8.0手机上运行时，报此错误。意为：当确定屏幕方向时，当前页面不可使用全屏属性。
 
 相关链接：
+
 * [解析1](https://zhuanlan.zhihu.com/p/32190223) 
 * [解析2](https://blog.csdn.net/starry_eve/article/details/82777160)  
+
 具体解决方案由业务决定。
